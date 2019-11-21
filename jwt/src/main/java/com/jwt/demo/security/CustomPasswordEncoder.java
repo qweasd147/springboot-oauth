@@ -23,4 +23,9 @@ public class CustomPasswordEncoder implements PasswordEncoder {
     public boolean matches(CharSequence rawPassword, String encodedPassword) {
         return passwordEncoder.matches(rawPassword, encodedPassword);
     }
+
+    @Override
+    public boolean upgradeEncoding(String encodedPassword) {
+        return passwordEncoder.upgradeEncoding(encodedPassword);
+    }
 }
