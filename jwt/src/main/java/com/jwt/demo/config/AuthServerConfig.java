@@ -31,7 +31,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     private final DataSource dataSource;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
-    private final SecurityProperties securityProperties;
+    //private final SecurityProperties securityProperties;
     private final UserDetailsService userDetailsService;
 
     private JwtAccessTokenConverter jwtAccessTokenConverter;
@@ -44,11 +44,19 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
             return jwtAccessTokenConverter;
         }
 
+        //TODO : make private, public key from security properties
+        /*
         SecurityProperties.JwtProperties jwtProperties = securityProperties.getJwt();
         KeyPair keyPair = keyPair(jwtProperties, keyStoreKeyFactory(jwtProperties));
 
         jwtAccessTokenConverter = new JwtAccessTokenConverter();
         jwtAccessTokenConverter.setKeyPair(keyPair);
+        return jwtAccessTokenConverter;
+        */
+
+        jwtAccessTokenConverter = new JwtAccessTokenConverter();
+        jwtAccessTokenConverter.setSigningKey("tempsigningkey");
+
         return jwtAccessTokenConverter;
     }
 
@@ -60,6 +68,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
         return tokenStore;
     }
 
+    @Bean
     public DefaultTokenServices tokenServices(final TokenStore tokenStore
             , final ClientDetailsService clientDetailsService){
 
