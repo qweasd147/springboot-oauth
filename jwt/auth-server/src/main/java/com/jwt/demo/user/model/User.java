@@ -17,6 +17,8 @@ public class User{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
 
+    private String password;
+
     @Column(nullable = false)
     @NotNull
     private String provider;		//default, kakao, naver 등
@@ -50,10 +52,11 @@ public class User{
     private WriteInfo<String> writeInfo = new WriteInfo<>();
 
     @Builder
-    private User(String provider, String id, String name, @NotNull String nickName, String email, String thirdPartyToken, UserState state) {
+    private User(String provider, String id, String password, String name, @NotNull String nickName, String email, String thirdPartyToken, UserState state) {
 
         this.provider = provider;
         this.id = id;
+        this.password = password;
         this.name = name;
         this.nickName = nickName;
         this.email = email;
@@ -66,6 +69,7 @@ public class User{
         this.idx = user.getIdx();
         this.provider = user.getProvider();
         this.id = user.getId();
+        this.password = user.getPassword();
         this.name = user.getName();
         this.nickName = user.getNickName();
         this.email = user.getEmail();

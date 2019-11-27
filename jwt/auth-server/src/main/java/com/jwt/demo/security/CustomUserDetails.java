@@ -33,7 +33,8 @@ public class CustomUserDetails extends User implements UserDetails {
 
     @Override
     public String getPassword() {
-        throw new UnsupportedOperationException("내가 직접 비밀번호 관리안함");
+        //throw new UnsupportedOperationException("내가 직접 비밀번호 관리안함");
+        return super.getPassword();
     }
 
     @Override
