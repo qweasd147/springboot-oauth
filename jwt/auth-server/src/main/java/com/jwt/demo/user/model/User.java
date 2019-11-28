@@ -20,8 +20,9 @@ public class User{
     private String password;
 
     @Column(nullable = false)
+    @Convert(converter = AuthProviderConverter.class)
     @NotNull
-    private String provider;		//default, kakao, naver 등
+    private AuthProvider provider;		//self, kakao, naver 등
 
     /**
      * 각 서드파티에서 어떠한 형태로 제공할지 몰라서 String
@@ -52,7 +53,7 @@ public class User{
     private WriteInfo<String> writeInfo = new WriteInfo<>();
 
     @Builder
-    private User(String provider, String id, String password, String name, @NotNull String nickName, String email, String thirdPartyToken, UserState state) {
+    private User(AuthProvider provider, String id, String password, String name, @NotNull String nickName, String email, String thirdPartyToken, UserState state) {
 
         this.provider = provider;
         this.id = id;
