@@ -24,8 +24,8 @@ public class JPAConfig {
         return () -> {
             //Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             //CustomUserDetails user = (CustomUserDetails) auth.getPrincipal();
-            //return Optional.of(user.getNickName());
-            return Optional.of("temp_id");
+            //return Optional.ofNullable(user.getNickName());
+            return Optional.ofNullable("temp_id");
         };
     }
 
