@@ -1,5 +1,6 @@
 package com.jwt.demo.user.model;
 
+import com.jwt.demo.user.validator.SignUpValid;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -12,6 +13,7 @@ public class UserDto {
 
     @Getter
     @NoArgsConstructor(access = AccessLevel.PROTECTED)
+    @SignUpValid
     public static class SignUpRequestDto {
 
         @NotBlank(message = "이메일 필수 입력")
