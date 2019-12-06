@@ -1,12 +1,27 @@
-
-security:
-  jwt:
-    key-store: classpath:keystore.jks
-    key-store-password: joo123
-    key-pair-alias: joo123
-    key-pair-password: joo321
-
 spring:
+  profiles:
+    active: local
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org.springframework.web.servlet: DEBUG
+    org.springframework.web.client.RestTemplate: TRACE
+    org.springframework.web: DEBUG
+    org.springframework.jdbc.datasource: DEBUG
+    org.hibernate.type: trace
+    org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices: DEBUG
+    org.springframework.security.web: DEBUG
+    org.springframework.jdbc.core: TRACE
+    org.springframework.jdbc:core.JdbcTemplate: DEBUG
+
+
+
+---
+spring:
+  profiles: local
   datasource:
     url: jdbc:mysql://localhost/oauth?zeroDateTimeBehavior=convertToNull&useSSL=false&useUnicode=true&characterEncoding=utf8
     username: root
@@ -26,14 +41,24 @@ spring:
       INDENT_OUTPUT: true
 
 
-logging:
-  level:
-    org.springframework.web.servlet: DEBUG
-    org.springframework.web.client.RestTemplate: TRACE
-    org.springframework.web: DEBUG
-    org.springframework.jdbc.datasource: DEBUG
-    org.hibernate.type: trace
-    org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices: DEBUG
-    org.springframework.security.web: DEBUG
-    org.springframework.jdbc.core: TRACE
-    org.springframework.jdbc:core.JdbcTemplate: DEBUG
+---
+spring:
+  profiles: docker
+  datasource:
+    url: jdbc:mysql://DB_HOST/oauth?zeroDateTimeBehavior=convertToNull&useSSL=false&useUnicode=true&characterEncoding=utf8
+    username: root
+    password:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    #platform: init
+    #initialization-mode: always
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+

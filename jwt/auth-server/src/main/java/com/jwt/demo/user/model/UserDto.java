@@ -3,12 +3,9 @@ package com.jwt.demo.user.model;
 import com.jwt.demo.user.validator.SignUpValid;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotBlank;
 
-@Component
-@RequiredArgsConstructor
 public class UserDto {
 
     @Getter

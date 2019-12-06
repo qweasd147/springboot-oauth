@@ -1,9 +1,34 @@
+spring:
+  profiles:
+    active: local
+
 server:
   port: 8081
 
+---
 spring:
+  profiles: local
   datasource:
     url: jdbc:mysql://localhost/oauth?zeroDateTimeBehavior=convertToNull&useSSL=false&useUnicode=true&characterEncoding=utf8
+    username: root
+    password:
+    driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+
+---
+spring:
+  profiles: docker
+  datasource:
+    url: jdbc:mysql://DB_HOST/oauth?zeroDateTimeBehavior=convertToNull&useSSL=false&useUnicode=true&characterEncoding=utf8
     username: root
     password:
     driverClassName: com.mysql.cj.jdbc.Driver

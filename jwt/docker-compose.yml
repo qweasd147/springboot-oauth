@@ -1,0 +1,40 @@
+version: '3.3'
+
+services:
+  db:
+    container_name: jwt_db
+    image: mysql:5.7
+    command: --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    restart: always
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: oauth
+    ports:
+      - 3308:3306
+    volumes:
+#      - ./db/data:/var/lib/mysql
+      - ./sql/:/docker-entrypoint-initdb.d
+
+  auth:
+    container_name: app-auth
+    build:
+      context: ./auth-server
+      #dockerfile: Dockerfile-auth
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    links:
+      - "db:DB_HOST"
+  res:
+    container_name: app-resource
+    build:
+      context: ./resources-server
+    restart: always
+    ports:
+      - 8081:8081
+    depends_on:
+      - db
+    links:
+      - "db:DB_HOST"
