@@ -38,3 +38,13 @@ $ curl 'http://localhost:8081/me' -H 'authorization: Bearer 발급받은 access 
 ```
 
 ## 옵션
+
+### 토큰 정보
+서비스 가능한 토큰의 종류 및 옵션은 `oauth_client_details` 테이블에서 관리한다.
+
+테이블 주요 옵션
+* client_id, client_secret 서버단에서 관리하고 어플리케이션 구분하는 값(`PK`)이 된다.
+* authrized_grant_types 해당 어플리케이션에 서비스 해 줄 토큰 타입
+* access_token_validity access token 유효기간(단위 초)
+* refresh_token_validity refresh token 유효기간(단위 초)
+
