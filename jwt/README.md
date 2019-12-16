@@ -37,6 +37,14 @@ $ curl -i -u clientId:secret \
 $ curl 'http://localhost:8081/me' -H 'authorization: Bearer 발급받은 access token'
 ```
 
+### access token 토큰 재발급(refresh token)
+
+```
+$ curl -i -u "clientId:secret" \
+-d "grant_type=refresh_token&refresh_token=(발급 받은 refresh token)" \
+-X POST http://localhost:8080/oauth/token
+```
+
 ## 옵션
 
 ### 토큰 정보
