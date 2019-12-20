@@ -12,15 +12,15 @@ public class AuthRequestValidator implements OAuth2RequestValidator {
 
     @Override
     public void validateScope(TokenRequest tokenRequest, ClientDetails client) throws InvalidScopeException {
-        log.debug("validate TokenRequest : {}", tokenRequest);
-        log.debug("validate client : {}", client);
+        log.info("validate TokenRequest : {}", tokenRequest);
+        log.info("validate client : {}", client);
     }
 
     @Override
     public void validateScope(AuthorizationRequest authorizationRequest, ClientDetails client)
             throws InvalidScopeException {
 
-        log.debug("\n## validate authorizationRequest : {}", authorizationRequest);
-        log.debug("\n## client : {}", client);
+        log.info("\n## validate authorizationRequest : {}", authorizationRequest);
+        log.info("\n## client : {}", client);
     }
 }
