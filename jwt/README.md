@@ -56,3 +56,13 @@ $ curl -i -u "clientId:secret" \
 * access_token_validity access token 유효기간(단위 초)
 * refresh_token_validity refresh token 유효기간(단위 초)
 
+## docker hub image 정보
+
+auth server
+`https://hub.docker.com/repository/docker/qweasd147/auth-server`
+
+resource server
+`https://hub.docker.com/repository/docker/qweasd147/resource-server`
+
+빌드 시키기도 귀찮으면 `docker-compose.yml`파일에 `auth.build`, `res.build`를 날려버리고 각각
+이미지 정보(`qweasd147/auth-server:1.0.0`, `qweasd147/resource-server:1.0.0`)를 넣어도 된다.
