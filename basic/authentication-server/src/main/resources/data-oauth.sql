@@ -15,7 +15,7 @@ INSERT INTO `oauth_client_details`(
   VALUES(
   'clientId',
   null,
-  '{bcrypt}$2a$10$vCXMWCn7fDZWOcLnIEhmK.74dvK1Eh8ae2WrWlhr2ETPLoxQctN4.',
+  '{bcrypt}$2a$10$iP9ejueOGXO29.Yio7rqeuW9.yOC4YaV8fJp3eIWbP45eZSHFEwMG',
   'read_profile,read_posts',
   'authorization_code,implicit,password,client_credentials,refresh_token',
   'http://localhost:9000/callback',
