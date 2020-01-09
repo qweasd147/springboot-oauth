@@ -16,5 +16,7 @@ spring:
 
 logging:
   level:
-    org.spring.security: debug
+    org.spring.security: trace
+    #root: trace
+
 
