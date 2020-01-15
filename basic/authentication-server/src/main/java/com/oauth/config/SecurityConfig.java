@@ -19,13 +19,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-                .authorizeRequests()
-                .antMatchers("/resources/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
                 .formLogin().loginPage("/login").permitAll()
+                .and().authorizeRequests()
+                .antMatchers("/resources/**").permitAll()
                 .and()
-                .httpBasic();
+                .requestMatchers()
+                .antMatchers("/", "/login", "/oauth/authorize", "/oauth/confirm_access", "/exit")
+                .and()
+                .authorizeRequests()
+                .antMatchers("/webjars/**").permitAll()
+                .anyRequest().authenticated();
     }
 
     /*

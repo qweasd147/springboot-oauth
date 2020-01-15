@@ -10,7 +10,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebMvc
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    //src/main/resources/templates/index.html
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("login").setViewName("index.html");
@@ -20,7 +19,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
                 .addResourceHandler("/resources/**")
-
                 .addResourceLocations("classpath:/templates/");
     }
 }

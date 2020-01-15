@@ -13,10 +13,8 @@ spring:
       hibernate:
         format_sql: true
 
-
 logging:
   level:
-    org.spring.security: trace
-    #root: trace
-
-
+    org.springframework:
+      web.servlet: DEBUG
+      security: DEBUG
