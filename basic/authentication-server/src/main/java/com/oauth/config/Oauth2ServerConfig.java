@@ -2,13 +2,11 @@ package com.oauth.config;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
@@ -30,6 +28,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     //private final AuthorizationCodeServices authorizationCodeServices;
 
     private final AuthenticationManager authenticationManager;
+    private final UserDetailsService userDetailsService;
     private final DataSource dataSource;
 
 
@@ -40,12 +39,8 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
                 .tokenStore(jdbcTokenStore())
                 //.authorizationCodeServices(authorizationCodeServices)
                 .approvalStore(jdbcApprovalStore())
+                .userDetailsService(this.userDetailsService)
                 .authenticationManager(authenticationManager);
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
     @Bean
