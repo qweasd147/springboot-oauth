@@ -41,6 +41,8 @@ public class UserDto {
                     .provider(AuthProvider.LOCAL)
                     .state(UserState.ENABLE)
                     .password(passwordEncoder.encode(this.password))
+                    .createdBy("temp")
+                    .lastModifiedBy("temp")
                     .build();
         }
     }

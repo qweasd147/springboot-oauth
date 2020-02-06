@@ -20,13 +20,13 @@ public class CustomUserDetailsService implements UserDetailsService {
     private final UserService userService;
 
     @Override
-    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        Optional<User> user = userService.findById(userId);
+        Optional<User> user = userService.findByEmail(email);
 
         if(!user.isPresent()){
-            log.warn("사용자를 찾을수 없음 : "+userId);
-            throw new UsernameNotFoundException("사용자 없음! "+userId);
+            log.warn("사용자를 찾을수 없음 : " + email);
+            throw new UsernameNotFoundException("사용자 없음! " + email);
         }
 
         CustomUserDetails userDetails = new CustomUserDetails(user.get());
