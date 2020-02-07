@@ -63,6 +63,7 @@ create table IF NOT EXISTS `user` (
   `last_modified_by` varchar(255) DEFAULT NULL,
   `last_modified_date` datetime(6) DEFAULT NULL,
   `password` varchar(300) DEFAULT NULL,
+  `login_try_count` int(5) DEFAULT 0,
   PRIMARY KEY (`idx`),
   UNIQUE KEY `email_UNIQUE` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;

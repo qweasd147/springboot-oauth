@@ -69,6 +69,8 @@ public class User {
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
 
+    private Integer loginTryCount = 0;
+
     @Builder
     public User(String password, @NotNull AuthProvider provider, @NotNull String id
             , @NotNull String name, @NotNull String nickName, @NotNull String email
@@ -85,6 +87,7 @@ public class User {
         this.createdDate = LocalDateTime.now();
         this.lastModifiedBy = lastModifiedBy;
         this.lastModifiedDate = LocalDateTime.now();
+        this.loginTryCount = 0;
     }
 
     protected void cloneUser(User user){
@@ -98,5 +101,21 @@ public class User {
         this.email = user.getEmail();
         this.thirdPartyToken = user.getThirdPartyToken();
         this.state = user.getState();
+        this.loginTryCount = user.getLoginTryCount();
+    }
+
+    public void incrementFailCount(){
+        this.loginTryCount++;
+    }
+
+    public void lockIfOverTryCount(){
+
+        if(this.loginTryCount < 5)  return;
+
+        this.state = UserState.LOCKED;
+    }
+
+    public void resetTryCount(){
+        this.loginTryCount = 0;
     }
 }
