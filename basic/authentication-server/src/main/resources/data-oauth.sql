@@ -15,7 +15,7 @@ INSERT INTO `oauth_client_details`(
   VALUES(
   'clientId',
   null,
-  '{bcrypt}$2a$10$iP9ejueOGXO29.Yio7rqeuW9.yOC4YaV8fJp3eIWbP45eZSHFEwMG',
+  '{bcrypt}$2a$10$q7m.AcKaN18PNKCgtqGizOE0zvRUUS56CcW9EglUt4BM3CWCx.i6i',
   'read_profile,read_posts',
   'authorization_code,implicit,password,client_credentials,refresh_token',
   'http://localhost:9000/callback',
@@ -25,3 +25,22 @@ INSERT INTO `oauth_client_details`(
   null ,
   'false'
   );
+
+-- user data
+INSERT INTO `user`(
+  `password`,
+  `provider`,
+  `id`,
+  `name`,
+  `nick_name`,
+  `email`,
+  `state`,
+  `created_by`,
+  `created_date`,
+  `last_modified_by`,
+  `last_modified_date`,
+  `login_try_count`
+  )
+VALUES ('{bcrypt}$2a$10$W85sJWwpsSRckc5ClTRVq.z0WdimrqrvIX2qeiZaF2YDNU/MPlBha',0,
+'temp_id', 'joo', 'nickname222', 'joohyung0531@gmail.com',0, 'temp_id','2019-12-04 02:05:19.058000'
+,'temp_id','2019-12-04 02:05:19.058000', 0);

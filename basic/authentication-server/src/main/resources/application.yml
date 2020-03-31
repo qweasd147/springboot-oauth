@@ -1,3 +1,6 @@
+server:
+  port: 8081
+
 spring:
   datasource:
     platform: oauth
@@ -7,7 +10,7 @@ spring:
     database: h2
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
