@@ -1,1 +1,28 @@
+custom:
+  auth:
+    server: http://localhost:8081
 
+security:
+  oauth2:
+    client:
+      client-id: clientId
+      client-secret: secret
+    resource:
+      token-info-uri: ${custom.auth.server}/oauth/check_token
+      user-info-uri: ${custom.auth.server}/me
+
+
+spring:
+  datasource:
+    platform: oauth
+    initialization-mode: always
+    driver-class-name: org.h2.Driver
+  jpa:
+    database: h2
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
