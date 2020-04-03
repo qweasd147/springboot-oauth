@@ -2,6 +2,7 @@ package com.oauth.security;
 
 import com.oauth.user.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationEventPublisher;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.Authentication;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class AuthenticationEventListener implements AuthenticationEventPublisher {
 
     private final UserService userService;
@@ -17,9 +19,11 @@ public class AuthenticationEventListener implements AuthenticationEventPublisher
     @Override
     public void publishAuthenticationSuccess(Authentication authentication) {
 
-        String userIdx = authentication.getName();
 
-        userService.resetFailCount(Long.valueOf(userIdx));
+        log.info("success authentication");
+
+        //String userIdx = authentication.getName();
+        //userService.resetFailCount(Long.valueOf(userIdx));
     }
 
     @Override

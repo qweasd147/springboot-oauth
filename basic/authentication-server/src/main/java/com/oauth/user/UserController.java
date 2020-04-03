@@ -3,8 +3,10 @@ package com.oauth.user;
 import com.oauth.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
 
@@ -18,7 +20,9 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/me")
-    public Principal me(final Principal principal){
+    @PreAuthorize("isAuthenticated()")
+    //@PreAuthorize("#oauth2.hasScope('read_profile')")
+    public Principal me(final Principal principal, HttpSession httpSession){
         return principal;
     }
 
