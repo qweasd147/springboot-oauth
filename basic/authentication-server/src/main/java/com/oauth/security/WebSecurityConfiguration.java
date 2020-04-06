@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationEventPublisher;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -32,6 +33,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    public void configure(WebSecurity web) {
+        web.ignoring()
+                .antMatchers("/resources/**")
+                .antMatchers(HttpMethod.OPTIONS);
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().
                 authorizeRequests()
@@ -39,15 +47,18 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                     .formLogin().loginPage("/login").permitAll()
                 .and()
-                    .authorizeRequests()
-                    .antMatchers("/resources/**").permitAll()
-                .and()
                     .requestMatchers()
                     .antMatchers("/", "/login", "/oauth/authorize", "/oauth/confirm_access", "/exit")
                 .and()
                     .authorizeRequests()
                     .antMatchers("/webjars/**").permitAll()
-                    .anyRequest().authenticated();
+                    .anyRequest().permitAll();
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     @Bean

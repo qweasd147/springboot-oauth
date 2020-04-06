@@ -2,10 +2,7 @@ package com.oauth.user.model;
 
 import com.oauth.user.convert.AuthProviderConverter;
 import com.oauth.user.convert.UserStateConverter;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -14,13 +11,17 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
-public class User {
+public class User implements Serializable {
+
+
+    private static final long serialVersionUID = -45386280092898227L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

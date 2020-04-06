@@ -19,7 +19,6 @@ public class CustomUserDetails extends User implements UserDetails {
     }
     public CustomUserDetails(User user) {
         cloneUser(user);
-
     }
 
     public void setAuthorities(Set<? extends GrantedAuthority> authorities) {
