@@ -19,8 +19,8 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/me")
-    @PreAuthorize("isAuthenticated()")
-    //@PreAuthorize("#oauth2.hasScope('read_profile')")
+    //@PreAuthorize("isAuthenticated()")
+    @PreAuthorize("#oauth2.hasScope('read_profile')")
     public Principal me(final Principal principal){
         return principal;
     }

@@ -37,6 +37,8 @@ dependencies {
 
     //임시
     runtimeOnly 'com.h2database:h2'
+
+    //compile group: 'mysql', name: 'mysql-connector-java'
 }
 
 test {
