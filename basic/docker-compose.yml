@@ -1,0 +1,21 @@
+version: '3.3'
+
+services:
+  auth:
+    container_name: basic-auth
+    build:
+      context: ./authentication-server
+    restart: always
+    ports:
+      - 8081:8081
+  res:
+    container_name: basic-resource
+    build:
+      context: ./resources-server
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - auth
+    links:
+      - "auth:AuthHost"

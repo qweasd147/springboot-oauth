@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 @RequiredArgsConstructor
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
-    private final DataSource dataSource;
+    //private final DataSource dataSource;
 
     @Override
     public void configure(HttpSecurity http) throws Exception {

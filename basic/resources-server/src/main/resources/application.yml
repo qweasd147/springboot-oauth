@@ -1,6 +1,6 @@
-custom:
-  auth:
-    server: http://localhost:8081
+spring:
+  profiles:
+    active: local
 
 security:
   oauth2:
@@ -12,17 +12,28 @@ security:
       user-info-uri: ${custom.auth.server}/me
 
 
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          client:
+            RestTemplate: TRACE
+
+
+---
 spring:
-  datasource:
-    platform: oauth
-    initialization-mode: always
-    driver-class-name: org.h2.Driver
-  jpa:
-    database: h2
-    database-platform: org.hibernate.dialect.H2Dialect
-    hibernate:
-      ddl-auto: create
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
+  profiles: local
+
+custom:
+  auth:
+    server: http://localhost:8081
+
+---
+spring:
+  profiles: docker
+
+custom:
+  auth:
+    server: http://AuthHost:8081
