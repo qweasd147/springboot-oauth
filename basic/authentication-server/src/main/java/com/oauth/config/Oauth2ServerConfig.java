@@ -14,7 +14,9 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.approval.ApprovalStore;
+import org.springframework.security.oauth2.provider.approval.DefaultUserApprovalHandler;
 import org.springframework.security.oauth2.provider.approval.JdbcApprovalStore;
+import org.springframework.security.oauth2.provider.approval.UserApprovalHandler;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -44,9 +46,19 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
                 .approvalStore(jdbcApprovalStore())
                 .userDetailsService(this.userDetailsService)
                 .authenticationManager(authenticationManager);
+                //.userApprovalHandler(userApprovalHandler());
                 //s.requestFactory(new CustomOauth2RequestFactory())
 
+
     }
+
+    /*
+    그냥 기본 제공해주는거 사용
+    @Bean
+    UserApprovalHandler userApprovalHandler() {
+        return new DefaultUserApprovalHandler();
+    }
+    */
 
     @Override
     public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {

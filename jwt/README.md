@@ -1,5 +1,9 @@
 # OAuth with JWT
 
+Resource Owner Password Credentials Grant (password) 방식
+---
+
+
 ## 설치 방법
 
 `auth-server` port 8080

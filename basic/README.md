@@ -1,4 +1,4 @@
-# OAuth 2.0
+# OAuth 2.0 Authrozation Code
 
 ## 기본적으로 셋팅한 값
 ### client

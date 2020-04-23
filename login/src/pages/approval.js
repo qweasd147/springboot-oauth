@@ -55,19 +55,25 @@ const useStyles = makeStyles((theme) => ({
 
 
 
+
+
 export default function Checkout() {
   const classes = useStyles();
-  const [approvalState, setApprovalState] = React.useState(true);
+  const [approvalState, setApprovalState] = React.useState(false);
 
   const formsubmit = (isApproval) => {
-    setApprovalState(isApproval);
+    
 
     const rootForm = document.querySelector('#root');
 
+    //외부 서버렌더링 + nonblock 조합이라 불가피하게 직접 dom 접근
+    //setApprovalState(isApproval);
+    rootForm.user_oauth_approval.value = isApproval;
     rootForm.action = '/oauth/authorize';
     rootForm.method = 'post';
     rootForm.submit();
   };
+
   return (
     <React.Fragment>
       <main className={classes.layout}>
@@ -76,7 +82,7 @@ export default function Checkout() {
             Checkout
           </Typography>
           <Informations />
-          <input type='hidden' value={approvalState} />
+          <input type='hidden' name='user_oauth_approval' value={approvalState} />
           <div className={classes.buttons}>
             <Button onClick={(e)=>{
               formsubmit(false)
