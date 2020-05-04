@@ -23,8 +23,11 @@ spring:
 logging:
   level:
     org.springframework:
-      web.servlet: DEBUG
+      web: DEBUG
       security: DEBUG
       jdbc:
         core:
           JdbcTemplate: DEBUG
+
+
+          #logging.level.org.springframework.web=TRACE

@@ -13,12 +13,16 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("login").setViewName("index.html");
+        //registry.addViewController("/oauth/authorize").setViewName("index.html");
+        //registry.addViewController("/oauth/customs").setViewName("index.html");
+
+
     }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
-                .addResourceHandler("/resources/**")
+                .addResourceHandler("/resources/**", "/favicon.ico")
                 .addResourceLocations("classpath:/templates/");
     }
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
@@ -6,7 +6,7 @@ import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import Informations from '../component/informations';
 
-function Copyright() {
+const Copyright = ()=>{
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
@@ -55,24 +55,33 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-
-
-export default function Checkout() {
+export default function Checkout({ location }) {
   const classes = useStyles();
-  const [approvalState, setApprovalState] = React.useState(false);
 
-  const formsubmit = (isApproval) => {
-    
+  const queryScopes = new URLSearchParams(location.search).get('scope');
+  const scopes = queryScopes?.split(',')?.map((scope)=>{
+    return {
+      name : scope
+      , value : true
+    }
+  })|| [];
+
+  const [scopeValues, setScopeValues] = useState(scopes);
+  const [scopeRefs, setScopeRefs] = useState(scopes);
+
+  const formsubmit = (isApproval)=>{
+
+    scopeRefs.forEach((el)=>{
+      el.value = isApproval;
+    });
 
     const rootForm = document.querySelector('#root');
 
     //외부 서버렌더링 + nonblock 조합이라 불가피하게 직접 dom 접근
-    //setApprovalState(isApproval);
-    rootForm.user_oauth_approval.value = isApproval;
     rootForm.action = '/oauth/authorize';
     rootForm.method = 'post';
     rootForm.submit();
-  };
+  }
 
   return (
     <React.Fragment>
@@ -82,7 +91,18 @@ export default function Checkout() {
             Checkout
           </Typography>
           <Informations />
-          <input type='hidden' name='user_oauth_approval' value={approvalState} />
+          <input type='hidden' name='user_oauth_approval' value="true" />
+          {
+            scopeValues?.map((scope, i)=>{
+              return (
+                <input type="hidden" key={`scope-key-${i}`} name={`scope.${scope.name}`}
+                value={scope.value}
+                ref={(el)=>{ scopeRefs[i]=el }
+                }
+                />
+              );
+            })
+          }
           <div className={classes.buttons}>
             <Button onClick={(e)=>{
               formsubmit(false)
