@@ -26,6 +26,7 @@ public class UserController {
     }
 
     @PostMapping("/signup")
+    @PreAuthorize("permitAll()")
     @ResponseStatus(value = HttpStatus.CREATED)
     public Res signUp(@Valid final SignUpRequestDto signUpRequestDto){
 

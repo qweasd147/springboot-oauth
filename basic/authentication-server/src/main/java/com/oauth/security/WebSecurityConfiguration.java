@@ -36,22 +36,22 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web.ignoring()
                 .antMatchers("/resources/**")
+                .antMatchers("/webjars/**")
+                .antMatchers("/**/favicon.ico")
+                //.requestMatchers(PathRequest.toStaticResources().atCommonLocations())
                 .antMatchers(HttpMethod.OPTIONS);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().
-                authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/users/signup").permitAll()
-                .and()
-                    .formLogin().loginPage("/login").permitAll()
+        http.csrf().disable()
+                .formLogin().loginPage("/login").permitAll()
                 .and()
                     .requestMatchers()
                     .antMatchers("/", "/login", "/oauth/authorize", "/oauth/confirm_access", "/exit")
+                    .antMatchers(HttpMethod.POST, "/users/signup")
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/webjars/**").permitAll()
                     .anyRequest().permitAll();
     }
 
