@@ -1,0 +1,18 @@
+FROM openjdk:8-jdk-slim
+
+RUN mkdir -p /app/java
+WORKDIR /app/java
+
+COPY . .
+
+#build
+#RUN ./gradlew build
+RUN ./gradlew build -x test
+
+
+ARG buildDir=build/unpack
+
+COPY ${buildDir}/lib BOOT-INF/lib
+COPY ${buildDir}/app .
+
+CMD java org.springframework.boot.loader.JarLauncher
