@@ -1,8 +1,6 @@
 # OAuth with JWT
 
-Resource Owner Password Credentials Grant (password) 방식
----
-
+## Resource Owner Password Credentials Grant (password) 방식
 
 ## 설치 방법
 
@@ -10,10 +8,13 @@ Resource Owner Password Credentials Grant (password) 방식
 `auth-server` port 8081
 
 ### 개발 환경
+
 `mysql`(port 3306),`auth-server`, `resources-server` 프로젝트를 각각 올린다.
 
 ### 배포 환경
+
 docker image들을 실행한다.
+
 ```
 $ docker-compose up -d
 ```
@@ -21,6 +22,7 @@ $ docker-compose up -d
 ## 테스트
 
 ### 회원 가입하기
+
 ```
 $ curl -X POST \
 -F 'email=joohyung05315@gmail.com' \
@@ -30,6 +32,7 @@ $ curl -X POST \
 ```
 
 ### 토큰 만들기(내부에서 로그인 처리)
+
 ```
 $ curl -i -u clientId:secret \
 -d "grant_type=password&username=(받은 idx 값)&password=joo123" \
@@ -37,6 +40,7 @@ $ curl -i -u clientId:secret \
 ```
 
 ### 로그인 정보 확인 by token
+
 ```
 $ curl 'http://localhost:8081/me' -H 'authorization: Bearer 발급받은 access token'
 ```
@@ -52,13 +56,15 @@ $ curl -i -u "clientId:secret" \
 ## 옵션
 
 ### 토큰 정보
+
 서비스 가능한 토큰의 종류 및 옵션은 `oauth_client_details` 테이블에서 관리한다.
 
 테이블 주요 옵션
-* client_id, client_secret 서버단에서 관리하고 어플리케이션 구분하는 값(`PK`)이 된다.
-* authrized_grant_types 해당 어플리케이션에 서비스 해 줄 토큰 타입
-* access_token_validity access token 유효기간(단위 초)
-* refresh_token_validity refresh token 유효기간(단위 초)
+
+- client_id, client_secret 서버단에서 관리하고 어플리케이션 구분하는 값(`PK`)이 된다.
+- authrized_grant_types 해당 어플리케이션에 서비스 해 줄 토큰 타입
+- access_token_validity access token 유효기간(단위 초)
+- refresh_token_validity refresh token 유효기간(단위 초)
 
 ## docker hub image 정보
 
@@ -70,3 +76,10 @@ resource server
 
 빌드 시키기도 귀찮으면 `docker-compose.yml`파일에 `auth.build`, `res.build`를 날려버리고 각각
 이미지 정보(`qweasd147/auth-server:1.0.0`, `qweasd147/resource-server:1.0.0`)를 넣어도 된다.
+
+## TODO
+
+docker image layer 캐싱 적용 중, 각 프로젝트의 app build, docker build & push를 한번에 하려고 작업중인데
+shell script가 아직 미숙해서 한번에 적용이 안되고 있음.
+
+현재는 각 프로젝트로 이동 후, `sh docker-build-push.sh {태그 번호}`를 해야 하는데 테스트&빌드를 어떻게 처리해야하는지 고민중
