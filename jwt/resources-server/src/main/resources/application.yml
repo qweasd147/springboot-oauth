@@ -3,7 +3,7 @@ spring:
     active: local
 
 server:
-  port: 8081
+  port: 8080
 
 ---
 spring:
@@ -23,7 +23,6 @@ spring:
   jackson:
     serialization:
       INDENT_OUTPUT: true
-
 ---
 spring:
   profiles: docker

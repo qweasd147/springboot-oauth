@@ -1,4 +1,4 @@
-version: '3.3'
+version: "3.3"
 
 services:
   db:
@@ -12,7 +12,7 @@ services:
     ports:
       - 3308:3306
     volumes:
-#      - ./db/data:/var/lib/mysql
+      #- ./db/data:/var/lib/mysql
       - ./sql/:/docker-entrypoint-initdb.d
 
   auth:
@@ -22,7 +22,7 @@ services:
       #dockerfile: Dockerfile-auth
     restart: always
     ports:
-      - 8080:8080
+      - 8081:8081
     depends_on:
       - db
     links:
@@ -33,7 +33,7 @@ services:
       context: ./resources-server
     restart: always
     ports:
-      - 8081:8081
+      - 8080:8080
     depends_on:
       - db
     links:
