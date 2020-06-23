@@ -4,8 +4,8 @@
 
 ## 설치 방법
 
-`auth-server` port 8080
 `auth-server` port 8081
+`resource-server` port 8080
 
 ### 개발 환경
 
@@ -28,7 +28,7 @@ $ curl -X POST \
 -F 'email=joohyung05315@gmail.com' \
 -F 'name=joo' \
 -F 'nickName=nickname421421' \
--F 'password=joo123' http://localhost:8080/users/signup
+-F 'password=joo123' http://localhost:8081/users/signup
 ```
 
 ### 토큰 만들기(내부에서 로그인 처리)
@@ -36,13 +36,13 @@ $ curl -X POST \
 ```
 $ curl -i -u clientId:secret \
 -d "grant_type=password&username=(받은 idx 값)&password=joo123" \
--X POST http://localhost:8080/oauth/token
+-X POST http://localhost:8081/oauth/token
 ```
 
 ### 로그인 정보 확인 by token
 
 ```
-$ curl 'http://localhost:8081/me' -H 'authorization: Bearer 발급받은 access token'
+$ curl 'http://localhost:8080/me' -H 'authorization: Bearer 발급받은 access token'
 ```
 
 ### access token 토큰 재발급(refresh token)
@@ -50,7 +50,7 @@ $ curl 'http://localhost:8081/me' -H 'authorization: Bearer 발급받은 access 
 ```
 $ curl -i -u "clientId:secret" \
 -d "grant_type=refresh_token&refresh_token=(발급 받은 refresh token)" \
--X POST http://localhost:8080/oauth/token
+-X POST http://localhost:8081/oauth/token
 ```
 
 ## 옵션

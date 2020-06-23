@@ -19,7 +19,7 @@ services:
     container_name: app-auth
     build:
       context: ./auth-server
-      #dockerfile: Dockerfile-auth
+      dockerfile: Dockerfile-cache
     restart: always
     ports:
       - 8081:8081
@@ -31,6 +31,7 @@ services:
     container_name: app-resource
     build:
       context: ./resources-server
+      dockerfile: Dockerfile-cache
     restart: always
     ports:
       - 8080:8080

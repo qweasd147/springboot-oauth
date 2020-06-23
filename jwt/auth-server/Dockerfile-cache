@@ -15,4 +15,4 @@ WORKDIR /app/java
 COPY --from=builder /app/java/build/unpack/lib BOOT-INF/lib
 COPY --from=builder /app/java/build/unpack/app .
 
-CMD java org.springframework.boot.loader.JarLauncher
+CMD ["java", "-Duser.timezone=Asia/Seoul", "-Dfile.encoding=utf-8", "-Dspring.profiles.active=docker", "org.springframework.boot.loader.JarLauncher"]
