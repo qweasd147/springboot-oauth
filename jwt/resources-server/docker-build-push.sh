@@ -7,7 +7,7 @@ exit -1
 fi
 
 #./gradlew clean
-./gradlew build -x test
+#./gradlew build -x test
 
 TAG=$1
 
