@@ -8,12 +8,17 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
-public class User{
+public class User implements Serializable {
+
+
+    private static final long serialVersionUID = -45386280092898227L;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

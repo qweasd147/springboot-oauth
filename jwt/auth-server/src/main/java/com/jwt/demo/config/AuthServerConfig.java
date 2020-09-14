@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,7 +32,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     private final DataSource dataSource;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
-    //private final SecurityProperties securityProperties;
+    private final SecurityProperties securityProperties;
     private final UserDetailsService userDetailsService;
 
     private JwtAccessTokenConverter jwtAccessTokenConverter;
@@ -44,18 +45,11 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
             return jwtAccessTokenConverter;
         }
 
-        //TODO : make private, public key from security properties
-        /*
         SecurityProperties.JwtProperties jwtProperties = securityProperties.getJwt();
-        KeyPair keyPair = keyPair(jwtProperties, keyStoreKeyFactory(jwtProperties));
+        KeyPair keyPair = keyPair(jwtProperties);
 
         jwtAccessTokenConverter = new JwtAccessTokenConverter();
         jwtAccessTokenConverter.setKeyPair(keyPair);
-        return jwtAccessTokenConverter;
-        */
-
-        jwtAccessTokenConverter = new JwtAccessTokenConverter();
-        jwtAccessTokenConverter.setSigningKey("tempsigningkey");
 
         return jwtAccessTokenConverter;
     }
@@ -100,11 +94,15 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
                 .checkTokenAccess("isAuthenticated()");
     }
 
-    private KeyStoreKeyFactory keyStoreKeyFactory(SecurityProperties.JwtProperties jwtProperties) {
-        return new KeyStoreKeyFactory(jwtProperties.getKeyStore(), jwtProperties.getKeyStorePassword().toCharArray());
-    }
+    private KeyPair keyPair(SecurityProperties.JwtProperties jwtProperties) {
 
-    private KeyPair keyPair(SecurityProperties.JwtProperties jwtProperties, KeyStoreKeyFactory keyStoreKeyFactory) {
-        return keyStoreKeyFactory.getKeyPair(jwtProperties.getKeyPairAlias(), jwtProperties.getKeyPairPassword().toCharArray());
+        Resource keyStore = jwtProperties.getKeyStore();
+        String storePassword = jwtProperties.getKeyStorePassword();
+        String keyPairPassword = jwtProperties.getKeyPairPassword();
+
+        KeyStoreKeyFactory keyStoreKeyFactory =
+                new KeyStoreKeyFactory(keyStore, storePassword.toCharArray());
+
+        return keyStoreKeyFactory.getKeyPair(jwtProperties.getKeyPairAlias(), keyPairPassword.toCharArray());
     }
 }

@@ -1,11 +1,9 @@
 package com.jwt.demo.config;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
@@ -22,8 +20,8 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @RequiredArgsConstructor
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
-    private static final String ROOT_PATTERN = "/**";
     private TokenStore tokenStore;
+    private final SecurityProperties securityProperties;
 
     @Override
     public void configure(final ResourceServerSecurityConfigurer resources) {
@@ -55,7 +53,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
 
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
-        jwtAccessTokenConverter.setSigningKey("tempsigningkey");
+        jwtAccessTokenConverter.setVerifierKey(securityProperties.getJwt().getPublicKey());
+
         return jwtAccessTokenConverter;
     }
 }
