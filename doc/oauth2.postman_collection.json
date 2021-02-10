@@ -1,0 +1,800 @@
+{
+	"info": {
+		"_postman_id": "4f071fab-f347-40a8-a33c-8fd59cf32203",
+		"name": "oauth2",
+		"description": "# Introduction\nWhat does your API do?\n\n# Overview\nThings that the developers should know about\n\n# Authentication\nWhat is the preferred way of using the API?\n\n# Error Codes\nWhat errors and status codes can a user expect?\n\n# Rate limit\nIs there a limit to the number of requests an user can send?",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:9000/oauth/token",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "secret",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "clientId",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "pass",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:9000/oauth/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "토큰 만들기",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "secret",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "clientId",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "joo123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/oauth/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "토큰 만들기 정상처리",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "joo123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/oauth/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-store"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 08 Apr 2020 08:23:38 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODYzMzc4MTgsInVzZXJfbmFtZSI6IjQiLCJqdGkiOiI2ODlhMzA1ZC01MDgxLTQ1NmItYjhiMy04Mzc4YWZmM2NiYTkiLCJjbGllbnRfaWQiOiJjbGllbnRJZCIsInNjb3BlIjpbInJlYWRfcHJvZmlsZSIsInJlYWRfcG9zdHMiXX0.850NA39DkI2A-8QSEotZukjhEm-jYrBdk6vg8hwqBy8\",\n    \"token_type\": \"bearer\",\n    \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODY0MjA2MTgsInVzZXJfbmFtZSI6IjQiLCJqdGkiOiI1M2IyNmUyMC1kZjZlLTRlNDctOThkZi1hODUxMTMyMDI1ZTciLCJjbGllbnRfaWQiOiJjbGllbnRJZCIsInNjb3BlIjpbInJlYWRfcHJvZmlsZSIsInJlYWRfcG9zdHMiXSwiYXRpIjoiNjg5YTMwNWQtNTA4MS00NTZiLWI4YjMtODM3OGFmZjNjYmE5In0.1KZCEfQqX2MBTvK06tvS2XUZsOlix5Yko_Y6mDgKDoY\",\n    \"expires_in\": 3599,\n    \"scope\": \"read_profile read_posts\",\n    \"jti\": \"689a305d-5081-456b-b8b3-8378aff3cba9\"\n}"
+				}
+			]
+		},
+		{
+			"name": "회원가입",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "joohyung05312@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "joo",
+							"type": "text"
+						},
+						{
+							"key": "nickName",
+							"value": "nickname222",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "joo123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/users/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "회원가입 중복된 이메일",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "joohyung05312@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "joo",
+									"type": "text"
+								},
+								{
+									"key": "nickName",
+									"value": "nickname222",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "joo123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"signup"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 08 Apr 2020 08:22:06 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"timestamp\": \"2020-04-08T08:22:06.860+0000\",\n    \"status\": 400,\n    \"error\": \"Bad Request\",\n    \"errors\": [\n        {\n            \"codes\": [\n                \"SignUpValid.signUpRequestDto\",\n                \"SignUpValid\"\n            ],\n            \"arguments\": [\n                {\n                    \"codes\": [\n                        \"signUpRequestDto.\",\n                        \"\"\n                    ],\n                    \"arguments\": null,\n                    \"defaultMessage\": \"\",\n                    \"code\": \"\"\n                }\n            ],\n            \"defaultMessage\": \"유효성 검사에 실패하였습니다.\",\n            \"objectName\": \"signUpRequestDto\",\n            \"code\": \"SignUpValid\"\n        }\n    ],\n    \"message\": \"Validation failed for object='signUpRequestDto'. Error count: 1\",\n    \"path\": \"/users/signup\"\n}"
+				},
+				{
+					"name": "회원가입 정상 처리",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "joohyung05312@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "joo",
+									"type": "text"
+								},
+								{
+									"key": "nickName",
+									"value": "nickname222",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "joo123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"signup"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 08 Apr 2020 08:21:34 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"idx\": 4,\n    \"email\": \"joohyung05312@gmail.com\",\n    \"name\": \"joo\",\n    \"nickName\": \"nickname222\"\n}"
+				}
+			]
+		},
+		{
+			"name": "로그인 정보 확인",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1OTI4NzY2NTIsInVzZXJfbmFtZSI6IjMiLCJqdGkiOiJiNzc1OGI0YS02YzQ0LTQ3ODYtYjQwZS0xMzQ5NmE3ZjdmZTIiLCJjbGllbnRfaWQiOiJjbGllbnRJZCIsInNjb3BlIjpbInJlYWQiLCJ3cml0ZSJdfQ.gD3qmluR8a8_r1zo0Lr5MjHYC7jtgvPlsdGq7MToyJU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/me",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"me"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "리소스 서버 로그인 정보 확인",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"me"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 08 Apr 2020 08:27:09 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"authorities\": [],\n    \"details\": {\n        \"remoteAddress\": \"0:0:0:0:0:0:0:1\",\n        \"sessionId\": null,\n        \"tokenValue\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODYzMzc4MTgsInVzZXJfbmFtZSI6IjQiLCJqdGkiOiI2ODlhMzA1ZC01MDgxLTQ1NmItYjhiMy04Mzc4YWZmM2NiYTkiLCJjbGllbnRfaWQiOiJjbGllbnRJZCIsInNjb3BlIjpbInJlYWRfcHJvZmlsZSIsInJlYWRfcG9zdHMiXX0.850NA39DkI2A-8QSEotZukjhEm-jYrBdk6vg8hwqBy8\",\n        \"tokenType\": \"Bearer\",\n        \"decodedDetails\": null\n    },\n    \"authenticated\": true,\n    \"userAuthentication\": {\n        \"authorities\": [],\n        \"details\": null,\n        \"authenticated\": true,\n        \"principal\": \"4\",\n        \"credentials\": \"N/A\",\n        \"name\": \"4\"\n    },\n    \"oauth2Request\": {\n        \"clientId\": \"clientId\",\n        \"scope\": [\n            \"read_profile\",\n            \"read_posts\"\n        ],\n        \"requestParameters\": {\n            \"client_id\": \"clientId\"\n        },\n        \"resourceIds\": [],\n        \"authorities\": [],\n        \"approved\": true,\n        \"refresh\": false,\n        \"redirectUri\": null,\n        \"responseTypes\": [],\n        \"extensions\": {},\n        \"grantType\": null,\n        \"refreshTokenRequest\": null\n    },\n    \"clientOnly\": false,\n    \"credentials\": \"\",\n    \"principal\": \"4\",\n    \"name\": \"4\"\n}"
+				}
+			]
+		},
+		{
+			"name": "회원가입 fromdata 사용 x",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "joohyung2@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "joo",
+							"type": "text"
+						},
+						{
+							"key": "nickName",
+							"value": "nickname222",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "joo123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auth_code 타입으로 토큰값 얻기",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "clientId",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "secret",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "code",
+							"value": "ZNk0qD",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code",
+							"type": "text"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:9000/callback",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8081/oauth/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"oauth",
+						"token"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "wgiXRe",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "auth_code 타입으로 토큰값 얻기 정상적인거",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "code",
+									"value": "CrZZX9",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "http://localhost:9000/callback",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8081/oauth/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"oauth",
+								"token"
+							],
+							"query": [
+								{
+									"key": "code",
+									"value": "wgiXRe",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Cache-Control",
+							"value": "no-store"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 13 Apr 2020 10:02:34 GMT"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"access_token\": \"fdf29917-10f7-409b-9bae-2e3e4b0ee97f\",\n    \"token_type\": \"bearer\",\n    \"refresh_token\": \"2d7f69f0-3032-4538-bc7b-60deb68d2560\",\n    \"expires_in\": 3599,\n    \"scope\": \"read_profile\"\n}"
+				}
+			]
+		},
+		{
+			"name": "basic 내 정보 요청",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "596e1ae0-fea1-4fe9-8245-f3eb7532d66c",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/me",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"me"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
