@@ -5,6 +5,9 @@ spring:
 server:
   port: 8080
 
+security:
+  saltkey: madeinjoohyung #config로 관리하지 말고 안전하게 암호화 or in memory 등으로 관리하자.
+
 ---
 spring:
   profiles: local

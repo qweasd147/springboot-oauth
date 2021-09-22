@@ -1,6 +1,7 @@
 package com.jwt.demo.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,6 +38,8 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     private JwtAccessTokenConverter jwtAccessTokenConverter;
     private TokenStore tokenStore;
 
+    @Value("${security.saltkey}")
+    private String saltKey;
 
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
@@ -55,7 +58,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
         */
 
         jwtAccessTokenConverter = new JwtAccessTokenConverter();
-        jwtAccessTokenConverter.setSigningKey("tempsigningkey");
+        jwtAccessTokenConverter.setSigningKey(saltKey);
 
         return jwtAccessTokenConverter;
     }
